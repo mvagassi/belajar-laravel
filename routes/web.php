@@ -1,29 +1,43 @@
 <?php
 
+use App\Models\Post;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $data=["title" => "Home Page"];
-    return view('home', $data);
+    return view('home', ["title" => "Home Page"]);
 });
 
 Route::get('/about', function () {
-    $data = ["title" => "About Page","name" => "Mohammad Vicky Agassi"];
-    return view('about', $data);
+    return view('about', [
+        "title" => "About Page",
+        "name" => "Mohammad Vicky Agassi"
+    ]);
 });
 
-Route::get('/blog', function () {
-    $data = ["title" => "Blog Page"];
-    return view('blog', $data);
+Route::get('/posts', function () {
+    return view('posts', [
+        "title" => "Blog Page",
+        "posts" => Post::all()
+    ]);
+});
+
+Route::get('/posts/{slug}', function ($slug) {
+
+    $post = Post::find($slug);
+
+    return view('post', [
+        "title" => "Single Post",
+        "post" => $post
+    ]);
 });
 
 Route::get('/contact', function () {
-    $data = [
+    return view('contact', [
         "title" => "Contact Page",
         "name" => "Mohammad Vicky Agassi",
         "email" => "z0a9u@example.com",
         "phone" => "08123456789",
         "social_media" => "https://github.com/MohammadVickyAgassi"
-    ];
-    return view('contact', $data);
+    ]);
 });
