@@ -13,12 +13,6 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('posts')->insert([
-            'title' => 'First Post',
-            'slug' => 'first-post',
-            'body' => 'This is my first post',
-            'category_id' => 1,
-            'author_id' => 1
-        ]);
+        
     }
 }
