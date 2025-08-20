@@ -17,32 +17,38 @@ class CategorySeeder extends Seeder
 
         Category::create([
             'name' => 'Laravel',
-            'slug' => 'laravel'
+            'slug' => 'laravel',
+            'color' => 'red',
         ]);
 
         Category::create([
             'name' => 'PHP',
-            'slug' => 'php'
+            'slug' => 'php',
+            'color' => 'stone',
         ]);
 
         Category::create([
             'name' => 'Python',
-            'slug' => 'python'
+            'slug' => 'python',
+            'color' => 'violet',
         ]);
 
         Category::create([
             'name' => 'FastAPI',
-            'slug' => 'fastapi'
+            'slug' => 'fastapi',
+            'color' => 'yellow',
         ]);
 
         Category::create([
             'name' => 'Restfull API',
-            'slug' => 'restfull-api'
+            'slug' => 'restfull-api',
+            'color' => 'blue',
         ]);
 
         Category::create([
             'name' => 'Javascript',
-            'slug' => 'javascript'
+            'slug' => 'javascript',
+            'color' => 'green',
         ]);
     }
 }
