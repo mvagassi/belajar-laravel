@@ -10,6 +10,10 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard', ["title" => "Dashboard"]);
+});
+
 Route::get('/', function () {
     return view('home', ["title" => "Home Page"]);
 });
