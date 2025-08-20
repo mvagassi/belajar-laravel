@@ -22,12 +22,10 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
-    // $posts = Post::with(['author', 'category'])->latest()->get();
-    $posts = Post::latest()->get();
-
+    $filter = ['search', 'category', 'author'];
     return view('posts', [
         "title" => "Blog Page",
-        "posts" => $posts
+        "posts" => Post::filter(request($filter))->latest()->paginate(6)->withQueryString()
     ]);
 });
 
