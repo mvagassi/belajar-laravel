@@ -1,6 +1,19 @@
 <x-admin-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="rounded-lg mb-4">
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+            <div class="w-full md:w-1/2">
+                <button onclick="addUser()" type="button"
+                    class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600">
+                    <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <path clip-rule="evenodd" fill-rule="evenodd"
+                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                    </svg>
+                    Add User
+                </button>
+            </div>
+        </div>
         <div class="mb-3 bg-white dark:bg-primary-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto p-3">
                 <table id="datatable" class="min-w-full border border-gray-200 divide-y divide-gray-200">
@@ -98,5 +111,9 @@
                     customizeDataTableUI($('#datatable'));
                 }
             });
+        }
+
+        const addUser = () => {
+            window.location.href = '/admin/master/user-management/create';
         }
 </script>

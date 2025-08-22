@@ -37,7 +37,16 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.master.user-management.create');
+    }
+
+    public function history()
+    {
+        $filter = ['search'];
+        return view('admin.master.user-management.user-management', [
+            "title" => "User Management",
+            "admins" => Admin::filter(request($filter))->latest()->paginate(5)->withQueryString()
+        ]);
     }
 
     /**
@@ -45,7 +54,17 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'fullname' => 'required|string|max:100',
+            'email' => 'required|email|unique:admins',
+            'username' => 'required|string|unique:admins',
+            'password' => 'required|string|min:8',
+            'role' => 'required|string',
+            'status' => 'required|boolean',
+        ]);
+
+        Admin::create($validate);
+        return response()->json(['message' => 'User created successfully']);
     }
 
     /**

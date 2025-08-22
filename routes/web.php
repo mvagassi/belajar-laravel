@@ -16,16 +16,11 @@ Route::get('/admin/overview', function () {
     return view('admin.overview.dashboard', ["title" => "Overview"]);
 });
 
-Route::apiResource('/api/admin/master/user-management', UserManagementController::class)
-    ->only('index');
-
-Route::get('/admin/master/user-management/', function () {
-    $filter = ['search'];
-    return view('admin.master.user-management', [
-        "title" => "User Management",
-        "admins" => Admin::filter(request($filter))->latest()->paginate(5)->withQueryString()
-    ]);
-});
+//USER MANAGEMENT
+Route::apiResource('/api/admin/master/user-management', UserManagementController::class)->only('index');
+Route::get('/admin/master/user-management/', [UserManagementController::class, 'history'])->name('admin.master.user-management.history');
+Route::get('/admin/master/user-management/create', [UserManagementController::class, 'create'])->name('admin.master.user-management.create');
+//USER MANAGEMENT
 
 Route::get('/', function () {
     return view('home', ["title" => "Home Page"]);
