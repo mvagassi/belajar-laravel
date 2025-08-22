@@ -1,8 +1,10 @@
 <?php
 
-use App\Models\Category;
+use App\Http\Controllers\UserManagementController;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Category;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
@@ -10,8 +12,19 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard', ["title" => "Dashboard"]);
+Route::get('/admin/overview', function () {
+    return view('admin.overview.dashboard', ["title" => "Overview"]);
+});
+
+Route::apiResource('/api/admin/master/user-management', UserManagementController::class)
+    ->only('index');
+
+Route::get('/admin/master/user-management/', function () {
+    $filter = ['search'];
+    return view('admin.master.user-management', [
+        "title" => "User Management",
+        "admins" => Admin::filter(request($filter))->latest()->paginate(5)->withQueryString()
+    ]);
 });
 
 Route::get('/', function () {
